@@ -6,7 +6,6 @@ import pyautogui
 pygame.init()
 
 # Set screen dimensions and colors for a scary theme
-
 def get_screen_dimensions():
     width, height = pyautogui.size()
     return width, height
@@ -15,13 +14,13 @@ SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_dimensions()
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 PLAYER_COLOR = (64, 224, 208)
-WALL_COLOR = (139, 0, 0)  
-FINISH_COLOR = (44, 195, 27)  # Color for the finish line
-PATH_COLOR = (100, 100, 100)  # Dark gray for the path background
+WALL_COLOR = (139, 0, 0)
+FINISH_COLOR = (44, 195, 27)
+PATH_COLOR = (100, 100, 100)
 
-# Background music 
+# Background music
 pygame.mixer.music.load('assets/limbo.mp3')
-pygame.mixer.music.play(-1)  # Loop indefinitely
+pygame.mixer.music.play(-1)
 
 # Set up the display
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -66,9 +65,9 @@ bsod_image = pygame.image.load('assets/BSOD.bmp')
 bsod_image = pygame.transform.scale(bsod_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Load the celebration image and sound for the finish line
-celebration_image = pygame.image.load('assets/Hackerman.bmp')  # Path to your celebration image
+celebration_image = pygame.image.load('assets/Hackerman.bmp')
 celebration_image = pygame.transform.scale(celebration_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
-celebration_sound = 'assets/congratulations.mp3'  # Path to your celebration sound
+celebration_sound = 'assets/congratulations.mp3'
 
 # Limited visibility effect (flashlight)
 visibility_radius = 0.1
@@ -108,17 +107,12 @@ def player_die():
     sys.exit()
 
 def celebrate():
-    # Stop the background music
     pygame.mixer.music.stop()
-    # Play the celebration sound
     pygame.mixer.music.load(celebration_sound)
     pygame.mixer.music.play()
-    # Display the celebration image
     screen.blit(celebration_image, (0, 0))
     pygame.display.flip()
-    # Wait for a few seconds to show the celebration
     pygame.time.wait(5000)
-    # Quit the game
     pygame.quit()
     sys.exit()
 
@@ -129,6 +123,11 @@ def close_game():
 def game_loop():
     global player_x, player_y
     
+    # Start timer
+    start_ticks = pygame.time.get_ticks() # Uses miliseconds
+    total_time = 30
+
+    # Game loop and event handling
     while True:
         # Handle events
         for event in pygame.event.get():
@@ -174,6 +173,17 @@ def game_loop():
         
         # Draw limited visibility (flashlight effect)
         draw_flashlight(player_x, player_y)
+        
+        # Calculate the remaining time
+        seconds = (pygame.time.get_ticks() - start_ticks) / 1000 # ms to s since start_ticks is in ms
+        remaining_time = total_time - seconds
+        font = pygame.font.Font(None, 36)
+        timer_text = font.render(f"Time: {int(remaining_time)}", True, WHITE)
+        screen.blit(timer_text, (SCREEN_WIDTH - 150, 10))
+        
+        # Check if time is up
+        if remaining_time <= 0:
+            player_die()
         
         # Update display
         pygame.display.flip()
