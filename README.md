@@ -27,6 +27,10 @@ To install the necessary dependencies, follow these steps:
 
 We hope you enjoy our **BSOD Scary Maze Game**!
 
+## Config
+  - `total_time` = Timer for game
+  - `player_speed` = Speed in which player moves
+
 ## Maintainers
 
 - **QelvinNagales** - [GitHub](https://github.com/QelvinNagales)
