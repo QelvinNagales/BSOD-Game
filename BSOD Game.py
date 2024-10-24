@@ -1,11 +1,17 @@
 import pygame
 import sys
+import pyautogui
 
 # Initialize pygame
 pygame.init()
 
 # Set screen dimensions and colors for a scary theme
-SCREEN_WIDTH, SCREEN_HEIGHT = 1920, 1080
+
+def get_screen_dimensions():
+    width, height = pyautogui.size()
+    return width, height
+
+SCREEN_WIDTH, SCREEN_HEIGHT = get_screen_dimensions()
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 PLAYER_COLOR = (64, 224, 208)
@@ -14,7 +20,7 @@ FINISH_COLOR = (44, 195, 27)  # Color for the finish line
 PATH_COLOR = (100, 100, 100)  # Dark gray for the path background
 
 # Background music 
-pygame.mixer.music.load('limbo.mp3')
+pygame.mixer.music.load('assets/limbo.mp3')
 pygame.mixer.music.play(-1)  # Loop indefinitely
 
 # Set up the display
@@ -56,19 +62,19 @@ walls = [
 finish_line = pygame.Rect(1889, 1015, 31, 38)
 
 # Load the BSOD image for when the player dies
-bsod_image = pygame.image.load('BSOD.bmp')
+bsod_image = pygame.image.load('assets/BSOD.bmp')
 bsod_image = pygame.transform.scale(bsod_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Load the celebration image and sound for the finish line
-celebration_image = pygame.image.load('Hackerman.bmp')  # Path to your celebration image
+celebration_image = pygame.image.load('assets/Hackerman.bmp')  # Path to your celebration image
 celebration_image = pygame.transform.scale(celebration_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
-celebration_sound = 'congratulations.mp3'  # Path to your celebration sound
+celebration_sound = 'assets/congratulations.mp3'  # Path to your celebration sound
 
 # Limited visibility effect (flashlight)
 visibility_radius = 0.1
 
 # BSOD sound
-bsod_sound = 'BSOD sound.mp3'
+bsod_sound = 'assets/BSOD sound.mp3'
 
 def draw_bsod():
     pygame.mixer.music.stop()
