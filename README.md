@@ -27,10 +27,7 @@ To install the necessary dependencies, follow these steps:
 
 We hope you enjoy our **BSOD Scary Maze Game**!
 
----
+## Maintainers
 
-Happy gaming!
-
-Created by:
-QelvinNagales
-Tarikuzuma
+- **QelvinNagales** - [GitHub](https://github.com/QelvinNagales)
+- **Tarikuzuma** - [GitHub](https://github.com/tarikuzuma)
