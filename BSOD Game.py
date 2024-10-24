@@ -122,6 +122,10 @@ def celebrate():
     pygame.quit()
     sys.exit()
 
+def close_game():
+    pygame.quit()
+    sys.exit()
+
 def game_loop():
     global player_x, player_y
     
@@ -129,8 +133,9 @@ def game_loop():
         # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                close_game()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                close_game()
         
         # Player movement
         keys = pygame.key.get_pressed()
