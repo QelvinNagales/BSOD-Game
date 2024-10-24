@@ -34,7 +34,7 @@ clock = pygame.time.Clock()
 player_size = 20
 player_x = 91
 player_y = 113
-player_speed = 5
+player_speed = 7
 
 # Maze walls (list of pygame.Rect objects) - Complex maze
 walls = [
